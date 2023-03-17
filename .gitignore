@@ -1,0 +1,9 @@
+/.idea/workspace.xml
+/_app_config_keys
+/bin
+/build
+/vendor
+Thumbs.db
+thumbs.db
+.phpunit.result.cache
+
