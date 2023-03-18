@@ -5,7 +5,7 @@ set -o nounset
 DIR="/api_emulator"
 
 echo "Starting dev server"
-php \
+exec php \
   -S "0.0.0.0:$PORT" \
   -t "$DIR/htdocs" \
   "$DIR/htdocs/index.php"

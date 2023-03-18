@@ -7,4 +7,4 @@ ENV INGENERATOR_ENV=standalone
 ENV HANDLERS_FILE=/api_emulator/default_handlers/handlers.php
 ENV PORT=80
 
-ENTRYPOINT "/api_emulator/entrypoint.sh"
+ENTRYPOINT ["/api_emulator/entrypoint.sh"]
