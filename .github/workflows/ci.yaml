@@ -1,0 +1,109 @@
+name: CI
+
+on:
+  push:
+
+env:
+  IMAGE_NAME: api_emulator
+
+jobs:
+#  test:
+#    runs-on: ubuntu-latest
+#    name: Build container
+#
+#    permissions:
+#      contents: read
+#
+#    steps:
+#    - name: Setup PHP
+#      uses: shivammathur/setup-php@v2
+#      with:
+#        php-version: 8.1
+#        tools: composer:v2
+#
+#    - name: Checkout
+#      uses: actions/checkout@v2
+#    - name: Get Composer Cache Directory
+#      id: composer-cache
+#      run: |
+#        echo "::set-output name=dir::$(composer config cache-files-dir)"
+#
+#    - uses: actions/cache@v2
+#      with:
+#        path: ${{ steps.composer-cache.outputs.dir }}
+#        key: ${{ runner.os }}-composer-default-${{ hashFiles('**/composer.lock') }}
+#        restore-keys: |
+#          ${{ runner.os }}-composer-default
+#
+#    - name: Install composer dependencies
+#      run: |
+#        composer install --no-interaction --no-progress
+#
+#    - name: Run unit tests
+#      run: vendor/bin/phpunit
+
+  build:
+    runs-on: ubuntu-latest
+    needs: [test]
+    name: Docker build
+
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: 8.1
+        tools: composer:v2
+
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Get Composer Cache Directory
+      id: composer-cache
+      run: |
+        echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+    - uses: actions/cache@v3
+      with:
+        path: ${{ steps.composer-cache.outputs.dir }}
+        key: ${{ runner.os }}-composer-default-${{ hashFiles('**/composer.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-composer-default
+
+    - name: Install composer dependencies
+      run: composer install --no-dev --no-interaction --no-progress
+
+    - name: Build image
+      run: docker build . --tag $IMAGE_NAME
+
+    - name: Run container smoketests
+      run: DOCKER_IMAGE=$IMAGE_NAME test/smoketests/run-smoketests.sh
+
+      # Only attempt to publish the image if this is triggered by a `push` (e.g. direct to the repo by a collaborator,
+      # not an external pull request). This step would anyway fail on a pull_request workflow because the required
+      # secret would not be available.
+    - name: Publish to Github Packages
+      if:   ${{ github.event_name == 'push' }}
+      run: |
+        set -o errexit
+        set -o nounset
+        # Login to Github registry
+        echo "${{ secrets.GITHUB_TOKEN }}" | docker login https://ghcr.io -u ${{ github.actor }} --password-stdin
+        IMAGE_ID=ghcr.io/${{ github.repository_owner }}/$IMAGE_NAME
+
+        # Change all uppercase to lowercase
+        IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
+
+        # Strip git ref prefix from version
+        VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
+
+        # Strip "v" prefix from tag name
+        [[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSION=$(echo $VERSION | sed -e 's/^v//')
+
+        # Push to the remote repo
+        echo "Publishing $IMAGE_ID:$VERSION"
+        docker tag $IMAGE_NAME $IMAGE_ID:$VERSION
+        docker push $IMAGE_ID:$VERSION
