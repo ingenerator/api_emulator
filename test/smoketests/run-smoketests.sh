@@ -26,12 +26,11 @@ docker run \
   --rm \
   -d \
   --name $container_name \
-  --network "host" \
   -p 9832:80 \
   "$DOCKER_IMAGE"
 
-sleep 1
-docker logs $container_name &
+sleep 5
+docker logs -f $container_name &
 
 echo "Running smoketests"
 health_output="$(curl --verbose http://127.0.0.1:9832/health)"
