@@ -1,8 +1,8 @@
 <?php
 
 use GuzzleHttp\Psr7\ServerRequest;
+use Ingenerator\ApiEmulator\ApiEmulatorServices;
 use Ingenerator\ApiEmulator\Logger;
-use Ingenerator\ApiEmulator\RequestExecutor;
 
 try {
     ob_start();
@@ -11,7 +11,8 @@ try {
 
     Logger::initialise(fn () => new Logger('php://stderr'));
 
-    $response = (new RequestExecutor(Logger::instance()))
+    $response = ApiEmulatorServices::instance()
+        ->makeRequestExecutor()
         ->execute(ServerRequest::fromGlobals());
 
     $output = ob_get_clean();
