@@ -33,7 +33,7 @@ sleep 5
 docker logs -f $container_name &
 
 echo "Running smoketests"
-health_output="$(curl --verbose http://127.0.0.1:9832/health)"
+health_output="$(curl --verbose http://127.0.0.1:9832/_emulator-meta/health)"
 
 echo "Got response: '$health_output'"
 
