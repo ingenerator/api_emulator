@@ -7,40 +7,40 @@ env:
   IMAGE_NAME: api_emulator
 
 jobs:
-#  test:
-#    runs-on: ubuntu-latest
-#    name: Build container
-#
-#    permissions:
-#      contents: read
-#
-#    steps:
-#    - name: Setup PHP
-#      uses: shivammathur/setup-php@v2
-#      with:
-#        php-version: 8.1
-#        tools: composer:v2
-#
-#    - name: Checkout
-#      uses: actions/checkout@v2
-#    - name: Get Composer Cache Directory
-#      id: composer-cache
-#      run: |
-#        echo "::set-output name=dir::$(composer config cache-files-dir)"
-#
-#    - uses: actions/cache@v2
-#      with:
-#        path: ${{ steps.composer-cache.outputs.dir }}
-#        key: ${{ runner.os }}-composer-default-${{ hashFiles('**/composer.lock') }}
-#        restore-keys: |
-#          ${{ runner.os }}-composer-default
-#
-#    - name: Install composer dependencies
-#      run: |
-#        composer install --no-interaction --no-progress
-#
-#    - name: Run unit tests
-#      run: vendor/bin/phpunit
+  test:
+    runs-on: ubuntu-latest
+    name: Build container
+
+    permissions:
+      contents: read
+
+    steps:
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: 8.1
+        tools: composer:v2
+
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Get Composer Cache Directory
+      id: composer-cache
+      run: |
+        echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+    - uses: actions/cache@v2
+      with:
+        path: ${{ steps.composer-cache.outputs.dir }}
+        key: ${{ runner.os }}-composer-default-${{ hashFiles('**/composer.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-composer-default
+
+    - name: Install composer dependencies
+      run: |
+        composer install --no-interaction --no-progress
+
+    - name: Run unit tests
+      run: vendor/bin/phpunit
 
   build:
     runs-on: ubuntu-latest
