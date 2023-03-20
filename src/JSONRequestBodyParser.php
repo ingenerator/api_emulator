@@ -13,12 +13,12 @@ class JSONRequestBodyParser
     public function parse(ServerRequestInterface $request): ServerRequestInterface
     {
         if ($this->hasJsonContent($request)) {
-            if ($request->getParsedBody() !== null) {
+            if ( ! empty($request->getParsedBody())) {
                 throw new \UnexpectedValueException(
                     'Can\'t automatically parse request with application/json content-type as it already has a parsed body'
                 );
             }
-            
+
             $json = $this->readJsonBodyContent($request);
 
             return $request->withParsedBody(JSON::decode($json));
