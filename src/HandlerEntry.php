@@ -13,7 +13,8 @@ class HandlerEntry
     public function __construct(
         public readonly string $pattern,
         public readonly string $match_string,
-        private readonly Closure $handler
+        public readonly bool $is_core_handler,
+        private readonly Closure $handler,
     ) {
 
     }

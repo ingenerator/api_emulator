@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Ingenerator\ApiEmulator;
 
+use Ingenerator\ApiEmulator\RequestRecorder\RequestRecorder;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Log\LoggerInterface;
@@ -12,7 +13,8 @@ class RequestExecutor
 {
     public function __construct(
         private LoggerInterface $logger,
-        private HandlerLoader $handler_loader = new HandlerLoader,
+        private RequestRecorder $request_recorder,
+        private HandlerLoader $handler_loader,
         private JSONRequestBodyParser $json_body_parser = new JSONRequestBodyParser,
     ) {
     }
@@ -20,11 +22,16 @@ class RequestExecutor
     public function execute(ServerRequestInterface $request): ResponseInterface
     {
         $handler = $this->handler_loader->getHandler($request);
-
-        $response = $handler->handle(
+        try {
             // Guzzle doesn't natively decode JSON bodies
-            $this->json_body_parser->parse($request)
-        );
+            $request = $this->json_body_parser->parse($request);
+            $response = $handler->handle($request);
+        } finally {
+            if ( ! $handler->is_core_handler) {
+                // Only log custom requests, not emulator metadata etc
+                $this->request_recorder->capture($request, $handler);
+            }
+        }
 
         $this->logRequest($request, $handler, $response);
 
