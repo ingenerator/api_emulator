@@ -8,6 +8,7 @@ use Ingenerator\PHPUtils\DateTime\Clock\RealtimeClock;
 use Ingenerator\PHPUtils\StringEncoding\JSON;
 use Psr\Http\Message\ServerRequestInterface;
 use Symfony\Component\Filesystem\Filesystem;
+use function file_get_contents;
 
 class DiskBackedRequestRecorder implements RequestRecorder
 {
@@ -22,8 +23,10 @@ class DiskBackedRequestRecorder implements RequestRecorder
 
     public function capture(ServerRequestInterface $request, HandlerEntry $emulator_handler): void
     {
-        $dirname = $this->base_dir.'/requests/'.$this->clock->getDateTime()->format('Y-m-d-H-i-s-u');
+        $request_id = $this->clock->getDateTime()->format('Y-m-d-H-i-s-u');
+        $dirname = $this->base_dir.'/requests/'.$request_id;
         $entry = new CapturedRequest(
+            id: $request_id,
             handler_pattern: $emulator_handler->pattern,
             uri: (string) $request->getUri(),
             method: $request->getMethod(),
@@ -40,4 +43,16 @@ class DiskBackedRequestRecorder implements RequestRecorder
         $this->filesystem->remove($this->base_dir.'/requests');
     }
 
+    /**
+     * @inheritDoc
+     */
+    public function listRequests(): array
+    {
+        $files = glob($this->base_dir.'/requests/*/request.json');
+
+        return array_map(
+            fn ($file) => new CapturedRequest(...JSON::decodeArray(file_get_contents($file))),
+            $files
+        );
+    }
 }

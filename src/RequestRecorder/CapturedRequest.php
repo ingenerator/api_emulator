@@ -9,6 +9,7 @@ class CapturedRequest implements JsonSerializable
 {
 
     public function __construct(
+        public readonly string $id,
         public readonly string $handler_pattern,
         public readonly string $uri,
         public readonly string $method,
