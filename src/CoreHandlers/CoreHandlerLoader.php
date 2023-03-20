@@ -16,6 +16,7 @@ class CoreHandlerLoader
     {
         return match ($path_match_string) {
             'DELETE /_emulator-meta/global-state' => new DeleteGlobalStateHandler($this->services->getRequestRecorder()),
+            'GET /_emulator-meta/health' => new HealthcheckHandler(),
             default => null
         };
     }
