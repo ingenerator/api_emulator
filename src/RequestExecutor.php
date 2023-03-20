@@ -14,7 +14,7 @@ class RequestExecutor
     public function __construct(
         private LoggerInterface $logger,
         private RequestRecorder $request_recorder,
-        private HandlerLoader $handler_loader = new HandlerLoader,
+        private HandlerLoader $handler_loader,
         private JSONRequestBodyParser $json_body_parser = new JSONRequestBodyParser,
     ) {
     }
@@ -27,7 +27,10 @@ class RequestExecutor
             $request = $this->json_body_parser->parse($request);
             $response = $handler->handle($request);
         } finally {
-            $this->request_recorder->capture($request, $handler);
+            if ( ! $handler->is_core_handler) {
+                // Only log custom requests, not emulator metadata etc
+                $this->request_recorder->capture($request, $handler);
+            }
         }
 
         $this->logRequest($request, $handler, $response);
