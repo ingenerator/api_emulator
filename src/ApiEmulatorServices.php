@@ -12,7 +12,10 @@ use Ingenerator\ApiEmulator\RequestRecorder\RequestRecorder;
  */
 class ApiEmulatorServices
 {
+    private HandlerDataRepository $data_repository;
     private RequestRecorder $request_recorder;
+
+    private const STATE_BASE_DIRECTORY = '/var/api_emulator';
 
     public static function instance()
     {
@@ -27,6 +30,7 @@ class ApiEmulatorServices
         return new RequestExecutor(
             Logger::instance(),
             $this->getRequestRecorder(),
+            $this->getDataRepository(),
             new HandlerLoader(
                 new CoreHandlerLoader($this)
             )
@@ -35,11 +39,16 @@ class ApiEmulatorServices
 
     public function getRequestRecorder(): RequestRecorder
     {
-        $this->request_recorder ??= new DiskBackedRequestRecorder(
-            '/var/api_emulator',
-        );
+        $this->request_recorder ??= new DiskBackedRequestRecorder(self::STATE_BASE_DIRECTORY);
 
         return $this->request_recorder;
+    }
+
+    private function getDataRepository(): HandlerDataRepository
+    {
+        $this->data_repository ??= new DiskBasedDataRepository(self::STATE_BASE_DIRECTORY);
+
+        return $this->data_repository;
     }
 
 }

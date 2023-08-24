@@ -29,6 +29,7 @@ class RequestExecutor
             $response = $handler->handle(
                 $request,
                 new HandlerRequestContext(
+                    data_repository: $this->data_repository
                 )
             );
         } finally {
