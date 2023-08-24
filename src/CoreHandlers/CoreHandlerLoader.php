@@ -4,12 +4,22 @@ declare(strict_types=1);
 namespace Ingenerator\ApiEmulator\CoreHandlers;
 
 use Ingenerator\ApiEmulator\ApiEmulatorServices;
+use function preg_match;
 
 class CoreHandlerLoader
 {
+    private readonly array $handler_factories;
+
     public function __construct(
-        private ApiEmulatorServices $svcs
+        ApiEmulatorServices $svcs
     ) {
+        $this->handler_factories = [
+            '#^DELETE /_emulator-meta/global-state$#' => fn () => new DeleteGlobalStateHandler(
+                $svcs->getRequestRecorder()
+            ),
+            '#^GET /_emulator-meta/health$#' => fn () => new HealthcheckHandler(),
+            '#^GET /_emulator-meta/requests$#' => fn () => new ListRequestDetailsHandler($svcs->getRequestRecorder()),
+        ];
     }
 
     public function findHandler(string $path_match_string): ?CoreHandler
@@ -20,5 +30,11 @@ class CoreHandlerLoader
             'GET /_emulator-meta/requests' => new ListRequestDetailsHandler($this->svcs->getRequestRecorder()),
             default => null
         };
+        foreach ($this->handler_factories as $pattern => $factory) {
+                return $factory();
+            }
+        }
+
+        return null;
     }
 }
