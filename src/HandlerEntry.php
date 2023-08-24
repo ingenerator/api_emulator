@@ -19,9 +19,9 @@ class HandlerEntry
 
     }
 
-    public function handle(ServerRequestInterface $request): ResponseInterface
+    public function handle(ServerRequestInterface $request, HandlerRequestContext $context): ResponseInterface
     {
-        $response = ($this->handler)($request);
+        $response = ($this->handler)($request, $context);
         if ( ! $response instanceof ResponseInterface) {
             throw new \UnexpectedValueException(
                 'Handler mapped to '.$this->pattern.' returned '.get_debug_type($response).' - must be '.

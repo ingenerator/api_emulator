@@ -35,7 +35,7 @@ class HandlerLoader
                 match_string: $request->getMethod().' '.$request->getUri()->getPath(),
                 // wrap in a closure for consistency with the custom ones
                 is_core_handler: true,
-                handler: fn ($r) => $handler->handle($r)
+                handler: $handler->handle(...)
             );
         }
 
