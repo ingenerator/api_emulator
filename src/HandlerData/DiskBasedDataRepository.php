@@ -1,7 +1,8 @@
 <?php
 
-namespace Ingenerator\ApiEmulator;
+namespace Ingenerator\ApiEmulator\HandlerData;
 
+use Ingenerator\ApiEmulator\HandlerDataRepository;
 use Ingenerator\PHPUtils\StringEncoding\JSON;
 use Symfony\Component\Filesystem\Filesystem;
 use function file_get_contents;
@@ -42,7 +43,10 @@ class DiskBasedDataRepository implements HandlerDataRepository
 
     private function getFilename(string $path): string
     {
-        // @todo: validate the path e.g. that it does not contain . or .. elements
+        if ( ! HandlerDataPathValidator::isValid($path)) {
+            throw new \InvalidArgumentException('Unsupported handler data path "'.$path.'"');
+        }
+
         return $this->base_dir.'/'.$path.'.json';
     }
 }

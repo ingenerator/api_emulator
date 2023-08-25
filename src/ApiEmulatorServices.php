@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Ingenerator\ApiEmulator;
 
 use Ingenerator\ApiEmulator\CoreHandlers\CoreHandlerLoader;
+use Ingenerator\ApiEmulator\HandlerData\DiskBasedDataRepository;
 use Ingenerator\ApiEmulator\RequestRecorder\DiskBackedRequestRecorder;
 use Ingenerator\ApiEmulator\RequestRecorder\RequestRecorder;
 
