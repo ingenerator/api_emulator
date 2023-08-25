@@ -12,10 +12,11 @@ use function implode;
 class RequestExecutor
 {
     public function __construct(
-        private LoggerInterface $logger,
-        private RequestRecorder $request_recorder,
-        private HandlerLoader $handler_loader,
-        private JSONRequestBodyParser $json_body_parser = new JSONRequestBodyParser,
+        private readonly LoggerInterface $logger,
+        private readonly RequestRecorder $request_recorder,
+        private readonly HandlerDataRepository $data_repository,
+        private readonly HandlerLoader $handler_loader,
+        private readonly JSONRequestBodyParser $json_body_parser = new JSONRequestBodyParser,
     ) {
     }
 
@@ -25,7 +26,12 @@ class RequestExecutor
         try {
             // Guzzle doesn't natively decode JSON bodies
             $request = $this->json_body_parser->parse($request);
-            $response = $handler->handle($request);
+            $response = $handler->handle(
+                $request,
+                new HandlerRequestContext(
+                    data_repository: $this->data_repository
+                )
+            );
         } finally {
             if ( ! $handler->is_core_handler) {
                 // Only log custom requests, not emulator metadata etc

@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Ingenerator\ApiEmulator\CoreHandlers;
 
 use GuzzleHttp\Psr7\Response;
+use Ingenerator\ApiEmulator\HandlerRequestContext;
 use Ingenerator\ApiEmulator\RequestRecorder\RequestRecorder;
 use Ingenerator\PHPUtils\StringEncoding\JSON;
 use Psr\Http\Message\ResponseInterface;
@@ -17,7 +18,7 @@ class ListRequestDetailsHandler implements CoreHandler
 
     }
 
-    public function handle(ServerRequestInterface $request): ResponseInterface
+    public function handle(ServerRequestInterface $request, HandlerRequestContext $context): ResponseInterface
     {
         $result = [];
         foreach ($this->request_recorder->listRequests() as $request) {
