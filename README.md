@@ -24,9 +24,10 @@ The emulator includes a simple regex-based routing layer. This dispatches incomi
 
 By default, the emulator defines handlers for:
 
-| HTTP method | URL                    | Description                                                                                                                          |
-|-------------|------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
-| *           | /ping-200(/{anything}) | Answers every request with a 200 status and a text/plain response "OK". Useful if your code doesn't care about the response content. |
+| HTTP method | URL                           | Description                                                                                                                          |
+|-------------|-------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
+| *           | /ping-200(/{anything})        | Answers every request with a 200 status and a text/plain response "OK". Useful if your code doesn't care about the response content. |
+| POST        | /ses/v2/email/outbound-emails | Stubs the Amazon SES v2 SendEmail API to return a valid response with a random message ID.                                           |
 
 ### Custom handlers
 

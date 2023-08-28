@@ -12,4 +12,5 @@ return [
         ['Content-Type' => 'text/plain'],
         'OK'
     ),
+    ...require(__DIR__.'/amazon_ses_v2.php'),
 ];
