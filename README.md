@@ -28,6 +28,7 @@ By default, the emulator defines handlers for:
 |-------------|-------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
 | *           | /ping-200(/{anything})        | Answers every request with a 200 status and a text/plain response "OK". Useful if your code doesn't care about the response content. |
 | POST        | /ses/v2/email/outbound-emails | Stubs the Amazon SES v2 SendEmail API to return a valid response with a random message ID.                                           |
+| POST        | /sendgrid/v3/mail/send        | Stubs the Sendgrid v3 send API to return a valid response with a random message ID.                                                  |
 
 ### Custom handlers
 

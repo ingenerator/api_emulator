@@ -13,4 +13,5 @@ return [
         'OK'
     ),
     ...require(__DIR__.'/amazon_ses_v2.php'),
+    ...require(__DIR__.'/sendgrid_v3_send.php'),
 ];
