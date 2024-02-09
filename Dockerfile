@@ -1,4 +1,4 @@
-FROM php:8.1-cli-alpine
+FROM php:8.2-cli-alpine
 
 COPY ./ /api_emulator
 WORKDIR /api_emulator
