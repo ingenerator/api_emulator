@@ -333,30 +333,30 @@
         },
         {
             "name": "ingenerator/php-utils",
-            "version": "v2.0.0",
+            "version": "v2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ingenerator/php-utils.git",
-                "reference": "42773732aa96a7e5509447736aab11250baff980"
+                "reference": "f5168a7e8c7bc1132564b259cbef74752fe8dfeb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ingenerator/php-utils/zipball/42773732aa96a7e5509447736aab11250baff980",
-                "reference": "42773732aa96a7e5509447736aab11250baff980",
+                "url": "https://api.github.com/repos/ingenerator/php-utils/zipball/f5168a7e8c7bc1132564b259cbef74752fe8dfeb",
+                "reference": "f5168a7e8c7bc1132564b259cbef74752fe8dfeb",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
-                "ext-mbstring": "~8.1.0 || ~8.2.0",
-                "ext-pdo": "~8.1.0 || ~8.2.0",
-                "ext-sodium": "~8.1.0 || ~8.2.0",
-                "php": "~8.1.0 || ~8.2.0",
+                "ext-mbstring": "~8.2.0 || ~8.3.0",
+                "ext-pdo": "~8.2.0 || ~8.3.0",
+                "ext-sodium": "~8.2.0 || ~8.3.0",
+                "php": "~8.2.0 || ~8.3.0",
                 "psr/log": "^1.1 || ^2.0 || ^3.0"
             },
             "require-dev": {
-                "johnkary/phpunit-speedtrap": "^3.3",
+                "ergebnis/phpunit-slow-test-detector": "^2.15",
                 "mikey179/vfsstream": "^1.6.11",
-                "phpunit/phpunit": "^9.5.5"
+                "phpunit/phpunit": "^11.0"
             },
             "type": "library",
             "autoload": {
@@ -384,7 +384,7 @@
                 "issues": "https://github.com/ingenerator/php-utils/issues",
                 "source": "https://github.com/ingenerator/php-utils"
             },
-            "time": "2023-10-27T10:13:37+00:00"
+            "time": "2024-08-02T16:54:05+00:00"
         },
         {
             "name": "psr/http-client",
