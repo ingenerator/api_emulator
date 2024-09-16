@@ -333,16 +333,16 @@
         },
         {
             "name": "ingenerator/php-utils",
-            "version": "v2.1.0",
+            "version": "v2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ingenerator/php-utils.git",
-                "reference": "f5168a7e8c7bc1132564b259cbef74752fe8dfeb"
+                "reference": "9f630459b4405fdebceb47c36d34fc422279842f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ingenerator/php-utils/zipball/f5168a7e8c7bc1132564b259cbef74752fe8dfeb",
-                "reference": "f5168a7e8c7bc1132564b259cbef74752fe8dfeb",
+                "url": "https://api.github.com/repos/ingenerator/php-utils/zipball/9f630459b4405fdebceb47c36d34fc422279842f",
+                "reference": "9f630459b4405fdebceb47c36d34fc422279842f",
                 "shasum": ""
             },
             "require": {
@@ -384,7 +384,7 @@
                 "issues": "https://github.com/ingenerator/php-utils/issues",
                 "source": "https://github.com/ingenerator/php-utils"
             },
-            "time": "2024-08-02T16:54:05+00:00"
+            "time": "2024-09-13T11:53:47+00:00"
         },
         {
             "name": "psr/http-client",
@@ -1066,16 +1066,16 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v5.1.0",
+            "version": "v5.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "683130c2ff8c2739f4822ff7ac5c873ec529abd1"
+                "reference": "23c79fbbfb725fb92af9bcf41065c8e9a0d49ddb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/683130c2ff8c2739f4822ff7ac5c873ec529abd1",
-                "reference": "683130c2ff8c2739f4822ff7ac5c873ec529abd1",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/23c79fbbfb725fb92af9bcf41065c8e9a0d49ddb",
+                "reference": "23c79fbbfb725fb92af9bcf41065c8e9a0d49ddb",
                 "shasum": ""
             },
             "require": {
@@ -1118,9 +1118,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nikic/PHP-Parser/issues",
-                "source": "https://github.com/nikic/PHP-Parser/tree/v5.1.0"
+                "source": "https://github.com/nikic/PHP-Parser/tree/v5.2.0"
             },
-            "time": "2024-07-01T20:03:41+00:00"
+            "time": "2024-09-15T16:40:33+00:00"
         },
         {
             "name": "phar-io/manifest",
