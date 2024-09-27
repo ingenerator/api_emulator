@@ -8,17 +8,18 @@ use Ingenerator\ApiEmulator\CoreHandlers\DeleteGlobalStateHandler;
 use Ingenerator\ApiEmulator\CoreHandlers\HealthcheckHandler;
 use Ingenerator\ApiEmulator\CoreHandlers\ListRequestDetailsHandler;
 use Ingenerator\ApiEmulator\CoreHandlers\ManageHandlerDataHandler;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class CoreHandlerLoaderTest extends TestCase
 {
 
-    public function test_it_is_initialisable()
+    public function test_it_is_initialisable(): void
     {
         $this->assertInstanceOf(CoreHandlerLoader::class, $this->newSubject());
     }
 
-    public static function provider_expected_handlers()
+    public static function provider_expected_handlers(): array
     {
         return [
             // Valid cases
@@ -40,10 +41,8 @@ class CoreHandlerLoaderTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider provider_expected_handlers
-     */
-    public function test_it_returns_expected_handlers(string $path_match_string, ?string $expect_handler)
+    #[DataProvider('provider_expected_handlers')]
+    public function test_it_returns_expected_handlers(string $path_match_string, ?string $expect_handler): void
     {
         $result = $this->newSubject()->findHandler($path_match_string);
 

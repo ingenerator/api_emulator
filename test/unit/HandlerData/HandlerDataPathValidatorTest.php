@@ -25,10 +25,8 @@ class HandlerDataPathValidatorTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider provider_safe_paths
-     */
-    public function test_it_only_validates_safe_paths(string $path, bool $expect_valid)
+    #[\PHPUnit\Framework\Attributes\DataProvider('provider_safe_paths')]
+    public function test_it_only_validates_safe_paths(string $path, bool $expect_valid): void
     {
         $this->assertSame($expect_valid, HandlerDataPathValidator::isValid($path));
 

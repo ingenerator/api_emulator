@@ -6,7 +6,7 @@
         "symfony/filesystem": "^7.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "^9.6.16"
+        "phpunit/phpunit": "^10.5"
     },
     "repositories": [
         {"type": "composer", "url": "https://php-packages.ingenerator.com"}
