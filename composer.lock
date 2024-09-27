@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "839262e0c8efd57b59c8b82d06ae71fa",
+    "content-hash": "ce304defd5c9e046a382c884c122ec5b",
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
@@ -2567,19 +2567,19 @@
     "platform": [],
     "platform-dev": [],
     "platform-overrides": {
-        "php": "8.2",
-        "ext-apcu": "8.2",
-        "ext-bcmath": "8.2",
+        "php": "8.3",
+        "ext-apcu": "8.3",
+        "ext-bcmath": "8.3",
         "ext-curl": "0",
         "ext-ffi": "8.1",
         "ext-gd": "0",
         "ext-json": "0",
         "ext-libxml": "0",
-        "ext-mbstring": "8.2",
+        "ext-mbstring": "8.3",
         "ext-openssl": "0",
-        "ext-PDO": "8.2",
+        "ext-PDO": "8.3",
         "ext-grpc": "3.13",
-        "ext-sodium": "8.2",
+        "ext-sodium": "8.3",
         "ext-tokenizer": "0.2",
         "ext-zip": "0"
     },
