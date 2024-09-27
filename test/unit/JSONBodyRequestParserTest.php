@@ -5,17 +5,16 @@ namespace test\unit;
 
 use GuzzleHttp\Psr7\ServerRequest;
 use Ingenerator\ApiEmulator\JSONRequestBodyParser;
+use PHPUnit\Framework\Attributes\TestWith;
 use PHPUnit\Framework\TestCase;
 use UnexpectedValueException;
 
 class JSONBodyRequestParserTest extends TestCase
 {
 
-    /**
-     * @testWith [[], "no content type header"]
-     *           [{"Content-Type": "application/x-www-form-urlencoded"}]
-     */
-    public function test_it_returns_same_request_if_not_json($headers)
+    #[TestWith([[], 'no content type header'])]
+    #[TestWith([['Content-Type' => 'application/x-www-form-urlencoded']])]
+    public function test_it_returns_same_request_if_not_json($headers): void
     {
         $request = new ServerRequest(
             'GET',
@@ -27,12 +26,10 @@ class JSONBodyRequestParserTest extends TestCase
         $this->assertSame($request, $this->newSubject()->parse($request));
     }
 
-    /**
-     * @testWith ["application/json"]
-     *           ["application/json; charset=utf8"]
-     *           ["application/json;charset=utf8"]
-     */
-    public function test_it_returns_request_with_decoded_json_body(string $content_type)
+    #[TestWith(['application/json'])]
+    #[TestWith(['application/json; charset=utf8'])]
+    #[TestWith(['application/json;charset=utf8'])]
+    public function test_it_returns_request_with_decoded_json_body(string $content_type): void
     {
         $request = new ServerRequest(
             'GET',
@@ -46,7 +43,7 @@ class JSONBodyRequestParserTest extends TestCase
         $this->assertSame(['I am' => 'a json body'], $new_request->getParsedBody());
     }
 
-    public function test_the_raw_content_is_still_readable_after_parsing()
+    public function test_the_raw_content_is_still_readable_after_parsing(): void
     {
         $original_body = '["any", "json", "here"]';
         $parsed = $this->newSubject()->parse(
@@ -62,7 +59,7 @@ class JSONBodyRequestParserTest extends TestCase
         $this->assertSame($original_body, $parsed->getBody()->getContents());
     }
 
-    public function test_it_throws_if_json_request_already_has_parsed_body()
+    public function test_it_throws_if_json_request_already_has_parsed_body(): void
     {
         // Shouldn't be possible at the PHP layer, but just in case guzzle behaviour changes in future
         $request = (new ServerRequest(
