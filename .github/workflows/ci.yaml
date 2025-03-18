@@ -22,22 +22,10 @@ jobs:
         tools: composer:v2
 
     - name: Checkout
-      uses: actions/checkout@v2
-    - name: Get Composer Cache Directory
-      id: composer-cache
-      run: |
-        echo "::set-output name=dir::$(composer config cache-files-dir)"
-
-    - uses: actions/cache@v2
-      with:
-        path: ${{ steps.composer-cache.outputs.dir }}
-        key: ${{ runner.os }}-composer-default-${{ hashFiles('**/composer.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-composer-default
-
-    - name: Install composer dependencies
-      run: |
-        composer install --no-interaction --no-progress
+      uses: actions/checkout@v3
+      
+    - name: Composer install
+      uses: ingenerator/github-composite-actions/cached-composer-install@v1
 
     - name: Run unit tests
       run: vendor/bin/phpunit
@@ -61,20 +49,10 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
 
-    - name: Get Composer Cache Directory
-      id: composer-cache
-      run: |
-        echo "::set-output name=dir::$(composer config cache-files-dir)"
-
-    - uses: actions/cache@v3
+    - name: Composer install
+      uses: ingenerator/github-composite-actions/cached-composer-install@v1
       with:
-        path: ${{ steps.composer-cache.outputs.dir }}
-        key: ${{ runner.os }}-composer-default-${{ hashFiles('**/composer.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-composer-default
-
-    - name: Install composer dependencies
-      run: composer install --no-dev --no-interaction --no-progress
+        no_dev: 'true'
 
     - name: Build image
       run: docker build . --tag $IMAGE_NAME
