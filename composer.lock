@@ -333,30 +333,30 @@
         },
         {
             "name": "ingenerator/php-utils",
-            "version": "v2.4.0",
+            "version": "v2.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ingenerator/php-utils.git",
-                "reference": "0c2be48ce4495d5efb7cefb670554f8983495c6c"
+                "reference": "2fe3e4a9da1f61bb0987acd1e9cd3a905868213c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ingenerator/php-utils/zipball/0c2be48ce4495d5efb7cefb670554f8983495c6c",
-                "reference": "0c2be48ce4495d5efb7cefb670554f8983495c6c",
+                "url": "https://api.github.com/repos/ingenerator/php-utils/zipball/2fe3e4a9da1f61bb0987acd1e9cd3a905868213c",
+                "reference": "2fe3e4a9da1f61bb0987acd1e9cd3a905868213c",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
-                "ext-mbstring": "~8.2.0 || ~8.3.0",
-                "ext-pdo": "~8.2.0 || ~8.3.0",
-                "ext-sodium": "~8.2.0 || ~8.3.0",
-                "php": "~8.2.0 || ~8.3.0",
+                "ext-mbstring": "~8.2.0 || ~8.3.0 || ~8.4.0",
+                "ext-pdo": "~8.2.0 || ~8.3.0 || ~8.4.0",
+                "ext-sodium": "~8.2.0 || ~8.3.0 || ~8.4.0",
+                "php": "~8.2.0 || ~8.3.0 || ~8.4.0",
                 "psr/log": "^1.1 || ^2.0 || ^3.0"
             },
             "require-dev": {
                 "ergebnis/phpunit-slow-test-detector": "^2.15",
-                "mikey179/vfsstream": "^1.6.11",
-                "phpunit/phpunit": "^11.0"
+                "mikey179/vfsstream": "^1.6.12",
+                "phpunit/phpunit": "^11.5"
             },
             "type": "library",
             "autoload": {
@@ -384,7 +384,7 @@
                 "issues": "https://github.com/ingenerator/php-utils/issues",
                 "source": "https://github.com/ingenerator/php-utils"
             },
-            "time": "2025-06-05T10:11:55+00:00"
+            "time": "2025-06-26T14:03:17+00:00"
         },
         {
             "name": "psr/http-client",
