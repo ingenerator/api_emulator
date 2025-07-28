@@ -18,12 +18,14 @@ jobs:
     - name: Setup PHP
       uses: shivammathur/setup-php@v2
       with:
-        php-version: 8.3
+        php-version: ${{ env.PHP_VERSION }}
         tools: composer:v2
 
     - name: Checkout
-      uses: actions/checkout@v3
-      
+      uses: actions/checkout@v4
+      with:
+        show-progress: false
+
     - name: Composer install
       uses: ingenerator/github-composite-actions/cached-composer-install@v1
 
