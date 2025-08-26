@@ -58,6 +58,11 @@ jobs:
 
     - name: Build image
       run: docker build . --tag $IMAGE_NAME
+  
+    - name: Check composer platform requirements
+      uses: ingenerator/github-composite-actions/check-docker-composer-platform@v1
+      with:
+        image: ${{ env.IMAGE_NAME }}
 
     - name: Run container smoketests
       run: DOCKER_IMAGE=$IMAGE_NAME test/smoketests/run-smoketests.sh
