@@ -333,16 +333,16 @@
         },
         {
             "name": "ingenerator/php-utils",
-            "version": "v2.5.0",
+            "version": "v2.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ingenerator/php-utils.git",
-                "reference": "2fe3e4a9da1f61bb0987acd1e9cd3a905868213c"
+                "reference": "337efe4dd0bed708b6b90e427020b8e098a54c7f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ingenerator/php-utils/zipball/2fe3e4a9da1f61bb0987acd1e9cd3a905868213c",
-                "reference": "2fe3e4a9da1f61bb0987acd1e9cd3a905868213c",
+                "url": "https://api.github.com/repos/ingenerator/php-utils/zipball/337efe4dd0bed708b6b90e427020b8e098a54c7f",
+                "reference": "337efe4dd0bed708b6b90e427020b8e098a54c7f",
                 "shasum": ""
             },
             "require": {
@@ -384,7 +384,7 @@
                 "issues": "https://github.com/ingenerator/php-utils/issues",
                 "source": "https://github.com/ingenerator/php-utils"
             },
-            "time": "2025-06-26T14:03:17+00:00"
+            "time": "2025-09-17T12:52:26+00:00"
         },
         {
             "name": "psr/http-client",
