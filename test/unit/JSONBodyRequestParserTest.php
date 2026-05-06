@@ -12,7 +12,7 @@ use UnexpectedValueException;
 class JSONBodyRequestParserTest extends TestCase
 {
 
-    #[TestWith([[], 'no content type header'])]
+    #[TestWith([[]], 'no content type header')]
     #[TestWith([['Content-Type' => 'application/x-www-form-urlencoded']])]
     public function test_it_returns_same_request_if_not_json($headers): void
     {
